@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Task.css"
 import TaskStatus from "../TaskStatus/TaskStatus";
 
-const Task = ({ task }) => {
+const Task = ({ task, fetchTasks}) => {
   return (
     <div className="taskContainer">
       <div className="TitleStatusContainer">
-        <TaskStatus status={task.status}/>
+        <TaskStatus task={task} fetchTasks={fetchTasks}/>
         <h2>{task.title}</h2>
       </div>
       <div> {task.description}</div>
@@ -15,5 +15,4 @@ const Task = ({ task }) => {
   );
 };
 
-// <i class="fa-solid fa-circle"></i>
 export default Task;

@@ -11,22 +11,24 @@ const TaskList = () => {
   const [user, token] = useAuth();
   const [tasks, setTasks] = useState([]);
 
+  const fetchTasks = async () => {
+    try {
+      let response = await axios.get(`${URL_HOST}/api/tasks/user/`, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      setTasks(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  };
+
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        let response = await axios.get(`${URL_HOST}/api/tasks/user/`, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setTasks(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
     fetchTasks();
   }, [token]);
+  
   return (
     <div className="taskListcontainer">
       <div className="listTitleContainer">
@@ -35,7 +37,7 @@ const TaskList = () => {
       <div className="tasksContainer">
         {tasks &&
           tasks.map((task) => (
-           <Task key={task.id} task={task}/>
+           <Task key={task.id} task={task} fetchTasks={fetchTasks}/>
           ))}
       </div>
     </div>
