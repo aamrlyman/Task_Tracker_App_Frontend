@@ -1,0 +1,11 @@
+
+.TitleStatusContainer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.taskContainer {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
