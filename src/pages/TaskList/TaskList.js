@@ -2,14 +2,17 @@ import React from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { URL_HOST } from "../../urlHost";
-import "./TaskList.css"
-import Task from "../../components/Task/Task"
+import "./TaskList.css";
+import Task from "../../components/Task/Task";
+import CreateTask from "../../components/CreateTask/CreateTask";
 
 import axios from "axios";
 
 const TaskList = () => {
   const [user, token] = useAuth();
   const [tasks, setTasks] = useState([]);
+  const [isCreateTask, setIsCreateTask] = useState();
+
 
   const fetchTasks = async () => {
     try {
@@ -28,7 +31,7 @@ const TaskList = () => {
   useEffect(() => {
     fetchTasks();
   }, [token]);
-  
+
   return (
     <div className="taskListcontainer">
       <div className="listTitleContainer">
@@ -37,9 +40,16 @@ const TaskList = () => {
       <div className="tasksContainer">
         {tasks &&
           tasks.map((task) => (
-           <Task key={task.id} task={task} fetchTasks={fetchTasks}/>
+            <Task key={task.id} task={task} fetchTasks={fetchTasks} />
           ))}
       </div>
+      {isCreateTask ? (
+        <CreateTask fetchTasks={fetchTasks} setIsCreateTask={setIsCreateTask} />
+      ) : (
+        <button className="addTaskButton" onClick={() => setIsCreateTask(true)}>
+          Add Task
+        </button>
+      )}
     </div>
   );
 };
