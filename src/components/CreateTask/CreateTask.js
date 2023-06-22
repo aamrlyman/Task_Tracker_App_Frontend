@@ -44,9 +44,10 @@ const CreateTask = ({ fetchTasks, setIsCreateTask}) => {
     };
     useEffect(() => {
       checkCharacterLengths();
-    }, [formData.unit, formData.name]);
+    }, [formData.title, formData.description]);
 
   async function createTask() {
+    if (formData.due_date === "") formData.due_date = null;
     try {
       let response = await axios.post(`${URL_HOST}/api/tasks/user/`, formData, {
         headers: {
@@ -77,7 +78,7 @@ const CreateTask = ({ fetchTasks, setIsCreateTask}) => {
             ref={inputRef}
             className="TaskTitleInput"
             type="text"
-            placeholder="Make Grocery List"
+            placeholder="New Task"
             name="title"
             value={formData.title}
             onChange={handleInputChange}
@@ -107,7 +108,7 @@ const CreateTask = ({ fetchTasks, setIsCreateTask}) => {
             className="descriptionInput"
             type="text"
             name="description"
-            placeholder="Notes about task"
+            placeholder="Notes"
             value={formData.description}
             onChange={handleInputChange}
             maxLength="1000"

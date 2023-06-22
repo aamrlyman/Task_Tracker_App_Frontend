@@ -39,15 +39,20 @@ const EditTask = ({ fetchTasks, setIsEdit, task }) => {
   };
   useEffect(() => {
     checkCharacterLengths();
-  }, [formData.unit, formData.name]);
+  }, [formData.title, formData.description]);
 
   async function editTask() {
+    if (formData.due_date === "") formData.due_date = null;
     try {
-      let response = await axios.put(`${URL_HOST}/api/tasks/${task.id}/`, formData, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
+      let response = await axios.put(
+        `${URL_HOST}/api/tasks/${task.id}/`,
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
+      );
       fetchTasks();
       setIsEdit(false);
       setInputFocus();
@@ -72,7 +77,7 @@ const EditTask = ({ fetchTasks, setIsEdit, task }) => {
             ref={inputRef}
             className="TaskTitleInput"
             type="text"
-            placeholder="Make Grocery List"
+            placeholder="New Task"
             name="title"
             value={formData.title}
             onChange={handleInputChange}
@@ -92,7 +97,11 @@ const EditTask = ({ fetchTasks, setIsEdit, task }) => {
             className="dueDateInput"
             type="date"
             name="due_date"
-            value={formData.due_date === null? formData.due_date = "": formData.due_date}
+            value={
+              formData.due_date === null
+                ? (formData.due_date = "")
+                : formData.due_date
+            }
             onChange={handleInputChange}
             maxLength="30"
           ></input>
@@ -102,8 +111,8 @@ const EditTask = ({ fetchTasks, setIsEdit, task }) => {
             className="descriptionInput"
             type="text"
             name="description"
-            placeholder="Notes about task"
-            value={formData.description === null? formData.description = "": formData.description}
+            placeholder="Notes"
+            value={formData.description}
             onChange={handleInputChange}
             maxLength="1000"
           ></input>
@@ -116,7 +125,10 @@ const EditTask = ({ fetchTasks, setIsEdit, task }) => {
           )}
         </label>
 
-        <button className="saveTaskButton" type="submit">
+        <button
+          className="saveTaskButton"
+          type="submit"
+        >
           <i className="fa-solid fa-floppy-disk"></i>
         </button>
       </form>
