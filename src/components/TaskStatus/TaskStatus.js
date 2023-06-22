@@ -24,11 +24,11 @@ const TaskStatus = ({ task, fetchTasks }) => {
   };
 
   return (
-    <div className="statusIconContainer">
+    <div className="statusIconContainer" onClick={() => toggleStatus(task.id)}>
         {task && task.status === "ready" ? (
-          <i className="fa-regular fa-circle"  onClick={() => toggleStatus(task.id)}></i>
+          <i className="fa-regular fa-circle"></i>
         ) : (
-          <i className={`fa-solid fa-circle ${task.status}`}  onClick={() => toggleStatus(task.id)}></i>
+          <i className={`fa-solid fa-circle ${task.status}`}></i>
         )}
     
     </div>

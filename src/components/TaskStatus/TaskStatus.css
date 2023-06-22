@@ -17,6 +17,7 @@ button.statusButton {
 .statusIconContainer {
     width: 10%;
     padding-top: 5px;
+    cursor: pointer;
 }
 
 /* i:active {
