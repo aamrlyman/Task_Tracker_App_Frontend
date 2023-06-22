@@ -1,0 +1,27 @@
+
+.in_progress{
+    color:green
+}
+.completed{
+    color:blue
+}
+
+button.statusButton {
+    border: none;
+}
+
+.fa-circle{
+    cursor: pointer;
+}
+
+.statusIconContainer {
+    width: 10%;
+    padding-top: 5px;
+}
+
+/* i:active {
+    color: #f0e1b2;
+    background-color: #7c262b;
+    box-shadow: 0 5px #526861;
+    transform: translateY(4px);
+  } */

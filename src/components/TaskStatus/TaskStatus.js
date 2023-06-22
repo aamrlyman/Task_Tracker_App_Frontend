@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { URL_HOST } from "../../urlHost";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import "./TaskStatus.css"
 
 const TaskStatus = ({ task, fetchTasks }) => {
   const [user, token] = useAuth();
@@ -23,14 +24,13 @@ const TaskStatus = ({ task, fetchTasks }) => {
   };
 
   return (
-    <div>
-      <button onClick={() => toggleStatus(task.id)}>
+    <div className="statusIconContainer">
         {task && task.status === "ready" ? (
-          <i className="fa-regular fa-circle"></i>
+          <i className="fa-regular fa-circle"  onClick={() => toggleStatus(task.id)}></i>
         ) : (
-          <i className="fa-solid fa-circle"></i>
+          <i className={`fa-solid fa-circle ${task.status}`}  onClick={() => toggleStatus(task.id)}></i>
         )}
-      </button>
+    
     </div>
   );
 };
