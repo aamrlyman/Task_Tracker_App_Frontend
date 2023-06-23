@@ -4,7 +4,7 @@ import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import "./TaskStatus.css"
 
-const TaskStatus = ({ task, fetchTasks }) => {
+const TaskStatus = ({ task, fetchTasks, handleSort}) => {
   const [user, token] = useAuth();
   const toggleStatus = async (taskId) => {
     try {
@@ -17,6 +17,7 @@ const TaskStatus = ({ task, fetchTasks }) => {
         }
       );
       fetchTasks();
+    //   handleSort();
       console.log(response.data);
     } catch (error) {
       console.log(error);

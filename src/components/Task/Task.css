@@ -5,8 +5,19 @@
 }
 
 .taskContainer {
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
     cursor: pointer;
+    text-align: left;
+    border-bottom: solid black 1px;
+}
+
+.taskandEditContainer {
+    display: flex;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* width: 50%; */
+}
+
+p.description, p.date{
+    font-size: .75rem;
+
 }
