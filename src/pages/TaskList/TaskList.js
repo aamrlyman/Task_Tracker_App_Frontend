@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { URL_HOST } from "../../urlHost";
@@ -21,37 +20,37 @@ const TaskList = () => {
           Authorization: "Bearer " + token,
         },
       });
-      setTasks(response.data);
+      handleSort(sortOption,response.data);
       // console.log(response.data);
     } catch (error) {
       console.log(error.response.data);
     }
   };
 
-  const handleSort = (option) => {
+  const handleSort = (option, array) => {
     // Implement the sorting logic based on the selected option
     // Update the tasks array accordingly
     // For example:
     let sortedTasks = [];
     switch (option) {
       case "title":
-        sortedTasks = tasks.sort((a, b) => a.title.localeCompare(b.title));
+        sortedTasks = array.sort((a, b) => a.title.localeCompare(b.title));
         break;
       case "description":
-        sortedTasks = tasks.sort((a, b) =>
+        sortedTasks = array.sort((a, b) =>
           a.description.localeCompare(b.description)
         );
         break;
       case "dueDate":
-        sortedTasks = tasks.sort(
+        sortedTasks = array.sort(
           (a, b) => new Date(a.due_date) - new Date(b.due_date)
         );
         break;
       case "status":
-        sortedTasks = tasks.sort((b, a) => a.status.localeCompare(b.status));
+        sortedTasks = array.sort((b, a) => a.status.localeCompare(b.status));
         break;
       default:
-        sortedTasks = tasks;
+        sortedTasks = array;
         break;
     }
 
@@ -73,6 +72,7 @@ const TaskList = () => {
             handleSort={handleSort}
             sortOption={sortOption}
             setSortOption={setSortOption}
+            tasks={tasks}
           />
         </div>
         <div className="tasksContainer">

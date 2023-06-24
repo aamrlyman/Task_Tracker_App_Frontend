@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-const SortTasks = ({sortOption, setSortOption, handleSort }) => {
+const SortTasks = ({sortOption, setSortOption, handleSort, tasks }) => {
 
 
   const handleSortChange = (event) => {
     const selectedOption = event.target.value;
     setSortOption(selectedOption)
-    handleSort(selectedOption);
+    handleSort(selectedOption, tasks);
   };
 
   return (
